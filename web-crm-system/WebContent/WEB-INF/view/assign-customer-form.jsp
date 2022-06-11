@@ -31,19 +31,9 @@
 	<div id = "container">
 	
 		<div id="content">
-		
-			<input type = "button" value = "Add Customer"
-				onclick = "window.location.href = 'showFormForAdd'; return false;"
-				class = "add-button"
-				/>
-			|	
-			<input type = "button" value = "Sales Reps"
-				onclick = "window.location.href = 'viewAllSalesReps'; return false;"
-				class = "add-button"
-				/>
 				
 			<br><br>
-				
+			
 			<form:form action = "search" method = "GET">
 			
 				Search customer: <input type = "text" name = "theSearchName"/>
@@ -71,13 +61,15 @@
 				<!-- loop over and print our customers -->
 				<c:forEach var = "tempCustomer" items = "${customers}">
 				
-					<c:url var = "updateLink" value = "/customer/showFormForUpdate">
+					<c:url var = "assignLink" value = "/salesRep/assignCustomer">
 					
 						<c:param name ="customerId" value = "${tempCustomer.id}"/>
+						
+						<c:param name ="salesRepId" value = "${tempSalesRep.id}"/>
 					
 					</c:url>
 					
-					<c:url var = "deleteLink" value = "/customer/delete">
+					<c:url var = "unassignLink" value = "">
 					
 						<c:param name ="customerId" value = "${tempCustomer.id}"/>
 					
@@ -92,12 +84,10 @@
 						<td>
 							
 							
-							<a href = "${updateLink}">Update</a>
+							<a href = "${assignLink}">Assign</a>
 							|
-							<a href = "${deleteLink}"
-							   onclick = "if (!(confirm('Delete customer?'))) return false">Delete</a>
-							|
-							<a href = "${updateLink}">Sales reps</a>
+							<a href = "${unassignLink}"
+							   onclick = "if (!(confirm('Delete customer?'))) return false">Unassign</a>
 							
 						</td>
 						
@@ -110,6 +100,14 @@
 		
 		
 		</div>
+		
+		<div style = "clear; both;"></div>
+		
+		<p>
+		
+			<a href = "${pageContext.request.contextPath}/salesRep/list">Back to list</a>
+		
+		</p>
 	
 	</div>
 

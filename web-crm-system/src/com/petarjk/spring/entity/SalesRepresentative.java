@@ -1,5 +1,6 @@
 package com.petarjk.spring.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -15,8 +16,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "customer")
-public class Customer {
+@Table(name = "sales_representative")
+public class SalesRepresentative {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,10 +35,10 @@ public class Customer {
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
-	@JoinTable(name = "customer_sales_representative", joinColumns = @JoinColumn(name = "customer_id"), inverseJoinColumns = @JoinColumn(name = "sales_representative_id"))
-	private List<SalesRepresentative> salesRepresentatives;
+	@JoinTable(name = "customer_sales_representative", joinColumns = @JoinColumn(name = "sales_representative_id"), inverseJoinColumns = @JoinColumn(name = "customer_id"))
+	private List<Customer> customers;
 
-	public Customer() {
+	public SalesRepresentative() {
 	}
 
 	public int getId() {
@@ -72,18 +73,28 @@ public class Customer {
 		this.email = email;
 	}
 
-	public List<SalesRepresentative> getSalesRepresentatives() {
-		return salesRepresentatives;
+	public List<Customer> getCustomers() {
+		return customers;
 	}
 
-	public void setSalesRepresentatives(List<SalesRepresentative> salesRepresentatives) {
-		this.salesRepresentatives = salesRepresentatives;
+	public void setCustomers(List<Customer> customers) {
+		this.customers = customers;
+	}
+
+	public void addCustomer(Customer theCustomer) {
+
+		if (customers == null) {
+
+			customers = new ArrayList<>();
+		}
+
+		customers.add(theCustomer);
 	}
 
 	// for logging
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
+		return "SalesRepresentative [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
 	}
 
 }

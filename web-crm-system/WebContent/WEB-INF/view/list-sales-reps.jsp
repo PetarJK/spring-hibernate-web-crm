@@ -8,7 +8,7 @@
 
 <head>
 
-	<title>List Customers</title>
+	<title>List Sales Representatives</title>
 	
 	<link type = "text/css"
 				  rel = "stylesheet"
@@ -22,7 +22,7 @@
 		
 		<div id = "header">
 		
-			<h2>CRM Customer Relationship Manager : CUSTOMERS</h2>
+			<h2>CRM Customer Relationship Manager : SALES REPS</h2>
 		
 		</div>
 	
@@ -32,13 +32,13 @@
 	
 		<div id="content">
 		
-			<input type = "button" value = "Add Customer"
+			<input type = "button" value = "Add Sales Rep"
 				onclick = "window.location.href = 'showFormForAdd'; return false;"
 				class = "add-button"
 				/>
-			|	
-			<input type = "button" value = "Sales Reps"
-				onclick = "window.location.href = 'viewAllSalesReps'; return false;"
+			|
+			<input type = "button" value = "Customers"
+				onclick = "window.location.href = 'viewAllCustomers'; return false;"
 				class = "add-button"
 				/>
 				
@@ -46,7 +46,7 @@
 				
 			<form:form action = "search" method = "GET">
 			
-				Search customer: <input type = "text" name = "theSearchName"/>
+				Search sales representative: <input type = "text" name = "theSearchName"/>
 				
 					<input type = "submit" value = "Search" class = "add-button"/>
 					
@@ -54,7 +54,7 @@
 				onclick = "window.location.href = 'list'; return false;"
 				class = "add-button"
 				/>
-				
+			
 			</form:form>
 			
 				<table>
@@ -69,36 +69,41 @@
 					</tr>
 				
 				<!-- loop over and print our customers -->
-				<c:forEach var = "tempCustomer" items = "${customers}">
+				<c:forEach var = "tempSalesRep" items = "${salesReps}">
 				
-					<c:url var = "updateLink" value = "/customer/showFormForUpdate">
+					<c:url var = "updateLink" value = "/salesRep/showFormForUpdate">
 					
-						<c:param name ="customerId" value = "${tempCustomer.id}"/>
+						<c:param name ="salesRepId" value = "${tempSalesRep.id}"/>
 					
 					</c:url>
 					
-					<c:url var = "deleteLink" value = "/customer/delete">
+					<c:url var = "deleteLink" value = "/salesRep/delete">
 					
-						<c:param name ="customerId" value = "${tempCustomer.id}"/>
+						<c:param name ="salesRepId" value = "${tempSalesRep.id}"/>
+					
+					</c:url>
+					
+					<c:url var = "assignedCustomersLink" value = "/salesRep/listAssignedCustomers">
+					
+						<c:param name ="salesRepId" value = "${tempSalesRep.id}"/>
 					
 					</c:url>
 				
 					<tr>
 					
-						<td> ${tempCustomer.firstName} </td>
-						<td> ${tempCustomer.lastName} </td>
-						<td> ${tempCustomer.email} </td>
+						<td> ${tempSalesRep.firstName} </td>
+						<td> ${tempSalesRep.lastName} </td>
+						<td> ${tempSalesRep.email} </td>
 						
 						<td>
-							
 							
 							<a href = "${updateLink}">Update</a>
 							|
 							<a href = "${deleteLink}"
-							   onclick = "if (!(confirm('Delete customer?'))) return false">Delete</a>
+							   onclick = "if (!(confirm('Delete sales representative?'))) return false">Delete</a>
 							|
-							<a href = "${updateLink}">Sales reps</a>
-							
+							<a href = "${assignedCustomersLink}">Assigned customers</a>
+						
 						</td>
 						
 					

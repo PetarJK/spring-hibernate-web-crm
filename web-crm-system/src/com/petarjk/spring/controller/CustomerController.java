@@ -77,4 +77,9 @@ public class CustomerController {
 		return "list-customers";
 	}
 
+	@GetMapping("/viewAllSalesReps")
+	public String viewAllSalesReps() {
+		return "redirect:/salesRep/list";
+	}
+
 }

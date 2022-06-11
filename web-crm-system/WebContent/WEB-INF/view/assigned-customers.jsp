@@ -8,7 +8,7 @@
 
 <head>
 
-	<title>List Customers</title>
+	<title>List Assigned Customers</title>
 	
 	<link type = "text/css"
 				  rel = "stylesheet"
@@ -22,7 +22,7 @@
 		
 		<div id = "header">
 		
-			<h2>CRM Customer Relationship Manager : CUSTOMERS</h2>
+			<h2>CRM Customer Relationship Manager : ASSIGNED CUSTOMERS</h2>
 		
 		</div>
 	
@@ -32,13 +32,8 @@
 	
 		<div id="content">
 		
-			<input type = "button" value = "Add Customer"
-				onclick = "window.location.href = 'showFormForAdd'; return false;"
-				class = "add-button"
-				/>
-			|	
-			<input type = "button" value = "Sales Reps"
-				onclick = "window.location.href = 'viewAllSalesReps'; return false;"
+			<input type = "button" value = "Assign Customer"
+				onclick = "window.location.href = 'showFormForAsign'; return false;"
 				class = "add-button"
 				/>
 				
@@ -77,12 +72,6 @@
 					
 					</c:url>
 					
-					<c:url var = "deleteLink" value = "/customer/delete">
-					
-						<c:param name ="customerId" value = "${tempCustomer.id}"/>
-					
-					</c:url>
-				
 					<tr>
 					
 						<td> ${tempCustomer.firstName} </td>
@@ -91,13 +80,7 @@
 						
 						<td>
 							
-							
-							<a href = "${updateLink}">Update</a>
-							|
-							<a href = "${deleteLink}"
-							   onclick = "if (!(confirm('Delete customer?'))) return false">Delete</a>
-							|
-							<a href = "${updateLink}">Sales reps</a>
+							<a href = "${updateLink}">Unassign</a>
 							
 						</td>
 						
@@ -110,6 +93,14 @@
 		
 		
 		</div>
+		
+		<div style = "clear; both;"></div>
+		
+		<p>
+		
+			<a href = "${pageContext.request.contextPath}/salesRep/list">Back to list</a>
+		
+		</p>
 	
 	</div>
 
