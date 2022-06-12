@@ -20,4 +20,6 @@ public interface SalesRepService {
 	public List<Customer> listAssignedCustomers(int theSalesRepId);
 
 	public void assignCustomer(int theCustomerId);
+
+	public void unassignCustomer(int theCustomerId);
 }

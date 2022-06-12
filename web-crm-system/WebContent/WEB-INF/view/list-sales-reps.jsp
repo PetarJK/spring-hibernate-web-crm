@@ -22,7 +22,7 @@
 		
 		<div id = "header">
 		
-			<h2>CRM Customer Relationship Manager : SALES REPS</h2>
+			<h2>CRM Customer Relationship Manager : Sales Reps</h2>
 		
 		</div>
 	

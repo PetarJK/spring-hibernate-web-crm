@@ -33,7 +33,7 @@ public class SalesRepresentative {
 	@Column(name = "email")
 	private String email;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
 	@JoinTable(name = "customer_sales_representative", joinColumns = @JoinColumn(name = "sales_representative_id"), inverseJoinColumns = @JoinColumn(name = "customer_id"))
 	private List<Customer> customers;
@@ -88,7 +88,17 @@ public class SalesRepresentative {
 			customers = new ArrayList<>();
 		}
 
-		customers.add(theCustomer);
+		if (!customers.contains(theCustomer)) {
+			customers.add(theCustomer);
+		}
+	}
+
+	public void removeCustomer(Customer theCustomer) {
+
+		if (customers != null && customers.contains(theCustomer)) {
+
+			customers.remove(theCustomer);
+		}
 	}
 
 	// for logging

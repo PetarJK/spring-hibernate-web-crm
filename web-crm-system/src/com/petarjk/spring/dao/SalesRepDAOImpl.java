@@ -101,7 +101,7 @@ public class SalesRepDAOImpl implements SalesRepDAO {
 
 		List<Customer> theCustomers = theSalesRepresentative.getCustomers();
 
-		System.out.println(theCustomers);
+		// System.out.println(theCustomers);
 
 		return theCustomers;
 	}
@@ -109,17 +109,17 @@ public class SalesRepDAOImpl implements SalesRepDAO {
 	@Override
 	public void assignCustomer(int theCustomerId) {
 
-		int id = getTempSalesRepId();
+		int tempSalesRepId = getTempSalesRepId();
 
 		Session currentSession = sessionFactory.getCurrentSession();
 
 		Customer tempCustomer = currentSession.get(Customer.class, theCustomerId);
 
-		SalesRepresentative tempSalesRepresentative = currentSession.get(SalesRepresentative.class, id);
+		SalesRepresentative tempSalesRepresentative = currentSession.get(SalesRepresentative.class, tempSalesRepId);
 
 		tempSalesRepresentative.addCustomer(tempCustomer);
 
-		currentSession.saveOrUpdate(tempSalesRepresentative);
+		currentSession.save(tempSalesRepresentative);
 
 	}
 
@@ -129,6 +129,23 @@ public class SalesRepDAOImpl implements SalesRepDAO {
 
 	public void setTempSalesRepId(int tempSalesRepId) {
 		this.tempSalesRepId = tempSalesRepId;
+	}
+
+	@Override
+	public void unassignCustomer(int theCustomerId) {
+
+		int tempSalesRepId = getTempSalesRepId();
+
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		Customer tempCustomer = currentSession.get(Customer.class, theCustomerId);
+
+		SalesRepresentative tempSalesRepresentative = currentSession.get(SalesRepresentative.class, tempSalesRepId);
+
+		tempSalesRepresentative.removeCustomer(tempCustomer);
+
+		currentSession.save(tempSalesRepresentative);
+
 	}
 
 }

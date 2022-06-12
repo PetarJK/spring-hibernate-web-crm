@@ -66,4 +66,12 @@ public class SalesRepServiceImpl implements SalesRepService {
 
 	}
 
+	@Override
+	@Transactional
+	public void unassignCustomer(int theCustomerId) {
+
+		salesRepDAO.unassignCustomer(theCustomerId);
+
+	}
+
 }

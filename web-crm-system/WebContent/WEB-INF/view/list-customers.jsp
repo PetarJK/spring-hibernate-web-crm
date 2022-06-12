@@ -96,8 +96,6 @@
 							|
 							<a href = "${deleteLink}"
 							   onclick = "if (!(confirm('Delete customer?'))) return false">Delete</a>
-							|
-							<a href = "${updateLink}">Sales reps</a>
 							
 						</td>
 						

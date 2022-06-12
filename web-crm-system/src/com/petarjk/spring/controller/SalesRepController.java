@@ -113,7 +113,14 @@ public class SalesRepController {
 
 		salesRepService.assignCustomer(theCustomerId);
 
-		return "redirect:/salesRep/list";
+		return "redirect:/salesRep/showFormForAsign";
 	}
 
+	@GetMapping("/unassignCustomer")
+	public String unassignCustomer(@RequestParam("customerId") int theCustomerId) {
+
+		salesRepService.unassignCustomer(theCustomerId);
+
+		return "redirect:/salesRep/showFormForAsign";
+	}
 }

@@ -22,7 +22,7 @@
 		
 		<div id = "header">
 		
-			<h2>CRM Customer Relationship Manager : CUSTOMERS</h2>
+			<h2>CRM Customer Relationship Manager : Customers</h2>
 		
 		</div>
 	
@@ -33,19 +33,6 @@
 		<div id="content">
 				
 			<br><br>
-			
-			<form:form action = "search" method = "GET">
-			
-				Search customer: <input type = "text" name = "theSearchName"/>
-				
-					<input type = "submit" value = "Search" class = "add-button"/>
-					
-					<input type = "button" value = "Clear search"
-				onclick = "window.location.href = 'list'; return false;"
-				class = "add-button"
-				/>
-				
-			</form:form>
 			
 				<table>
 				
@@ -65,16 +52,14 @@
 					
 						<c:param name ="customerId" value = "${tempCustomer.id}"/>
 						
-						<c:param name ="salesRepId" value = "${tempSalesRep.id}"/>
-					
 					</c:url>
 					
-					<c:url var = "unassignLink" value = "">
+					<c:url var = "unassignCustomerLink" value = "/salesRep/unassignCustomer">
 					
 						<c:param name ="customerId" value = "${tempCustomer.id}"/>
 					
 					</c:url>
-				
+					
 					<tr>
 					
 						<td> ${tempCustomer.firstName} </td>
@@ -84,10 +69,12 @@
 						<td>
 							
 							
-							<a href = "${assignLink}">Assign</a>
-							|
-							<a href = "${unassignLink}"
-							   onclick = "if (!(confirm('Delete customer?'))) return false">Unassign</a>
+							<a href = "${assignLink}"
+								onclick = "if (!(confirm('Asign customer?'))) return false">Assign</a>
+							|	
+							<a href = "${unassignCustomerLink}"
+								onclick = "if (!(confirm('Unassign customer?'))) return false">Unassign</a>
+							
 							
 						</td>
 						
@@ -105,7 +92,7 @@
 		
 		<p>
 		
-			<a href = "${pageContext.request.contextPath}/salesRep/list">Back to list</a>
+			<a href = "${pageContext.request.contextPath}/salesRep/list">Back to sales reps</a>
 		
 		</p>
 	

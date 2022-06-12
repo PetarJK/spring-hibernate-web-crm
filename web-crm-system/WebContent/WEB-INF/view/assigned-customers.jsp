@@ -22,7 +22,7 @@
 		
 		<div id = "header">
 		
-			<h2>CRM Customer Relationship Manager : ASSIGNED CUSTOMERS</h2>
+			<h2>CRM Customer Relationship Manager : Assigned Customers</h2>
 		
 		</div>
 	
@@ -38,19 +38,6 @@
 				/>
 				
 			<br><br>
-				
-			<form:form action = "search" method = "GET">
-			
-				Search customer: <input type = "text" name = "theSearchName"/>
-				
-					<input type = "submit" value = "Search" class = "add-button"/>
-					
-					<input type = "button" value = "Clear search"
-				onclick = "window.location.href = 'list'; return false;"
-				class = "add-button"
-				/>
-				
-			</form:form>
 			
 				<table>
 				
@@ -59,18 +46,11 @@
 						<th>First Name</th>
 						<th>Last Name</th>
 						<th>Email</th>
-						<th>Action</th>
 					
 					</tr>
 				
 				<!-- loop over and print our customers -->
 				<c:forEach var = "tempCustomer" items = "${customers}">
-				
-					<c:url var = "updateLink" value = "/customer/showFormForUpdate">
-					
-						<c:param name ="customerId" value = "${tempCustomer.id}"/>
-					
-					</c:url>
 					
 					<tr>
 					
@@ -79,9 +59,7 @@
 						<td> ${tempCustomer.email} </td>
 						
 						<td>
-							
-							<a href = "${updateLink}">Unassign</a>
-							
+
 						</td>
 						
 					
@@ -98,7 +76,7 @@
 		
 		<p>
 		
-			<a href = "${pageContext.request.contextPath}/salesRep/list">Back to list</a>
+			<a href = "${pageContext.request.contextPath}/salesRep/list">Back to sales reps</a>
 		
 		</p>
 	
